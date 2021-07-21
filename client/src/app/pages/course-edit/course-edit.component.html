@@ -1,0 +1,58 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Course</h1>
+</div>
+<div class="card mb-40">
+    <div class="card-body">
+        <h5 class="card-title border-bottom border-italia">
+            <i class="fa fa-search"></i> Dettaglio
+        </h5>
+        <form #editForm="ngForm" [ngClass]="{'was-validated': formValid!=null}">
+            <div class="row mt-40 justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" [(ngModel)]="item.name" name="name" #name="ngModel" required>
+                        <label [className]="item.name && item.name.length > 0 ? 'active' : ''" for="name">Name *</label>
+                        <div class="invalid-feedback">Valore obbligatorio</div>
+                    </div>
+                    <!-- RELATIONS -->
+                    
+
+
+                    <h2 class="mb-20 mt-40" *ngIf="externalStudent__course[0] || externalTeacher__course[0] || externalExame__course[0]">Relazioni esterne</h2>
+        
+                        <h3 *ngIf="externalStudent__course[0]">Student</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalStudent__course">
+                                <a [routerLink]="['/students', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+                        <h3 *ngIf="externalTeacher__course[0]">Teacher</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalTeacher__course">
+                                <a [routerLink]="['/teachers', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+                        <h3 *ngIf="externalExame__course[0]">Exame</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalExame__course">
+                                <a [routerLink]="['/exames', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+
+                    <!-- BUTTON BAR -->
+                    <div class="mt-40">
+                        <button class="btn btn-primary pull-right" (click)="save(editForm.valid, item)">Salva</button>
+                        <button class="btn btn-secondary pull-right mr-2" (click)="goBack()">Torna alla lista</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
